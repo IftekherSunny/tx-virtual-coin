@@ -1,0 +1,68 @@
+<html>
+    <head></head>
+    <body>
+        
+        <!-- required template -->
+        <script id="price-card" type="x-tmpl-mustache">
+            <div class="price-cards">
+                {{#priceCards}}
+                <div class="price-card">
+                    <div class="price-card__header">
+
+                        <h2> {{ symbol }} </h2>
+                        <h4> {{ name }} </h4>
+                    </div>
+
+                    <div class="price-card__body">
+                        {{#cryptoCurrencies}}
+                            <div class="price-card__cryptocurrencies">
+                                <label>{{ label }}</label>
+                                <p>{{ value }}</p>
+                            </div>
+                        {{/cryptoCurrencies}}
+                    </div>
+                </div>
+                {{/priceCards}}
+            </div>
+        </script>
+
+        <script id="converter" type="x-tmpl-mustache">
+            <div class="converter">
+                <div class="converter__input-group">
+                    <div class="input-field">
+                        <select onChange="txVirtualCoin.onCryptoCurrencyChange(this)">
+                            {{#cryptoCurrencies}}
+                                <option value="{{id}}">{{name}}</option>
+                            {{/cryptoCurrencies}}
+                        </select> 
+
+                        <input type="text" value="{{converter.cryptoCurrency.value}}" onKeyup="txVirtualCoin.updateCurrency('cryptocurrency', this)" />
+                    </div>
+
+                    <div class="input-field">
+                        <select onChange="txVirtualCoin.onCurrencyChange(this)">
+                            {{#currencies}}
+                                <option value="{{index}}">{{label}}</option>
+                            {{/currencies}}
+                        </select> 
+
+                        <input type="text" value="{{converter.currency.value}}" onKeyup="txVirtualCoin.updateCurrency('currency', this)" />
+                    </div>
+                </div>
+            </div>
+        </script>
+
+
+
+        <!-- js -->
+        <TXVirtualCoin type="price-card" filter="bitcoin, dash">Loading data...</TXVirtualCoin>
+        <TXVirtualCoin type="converter" filter="bitcoin, dash">Loading data...</TXVirtualCoin>
+
+        <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+            crossorigin="anonymous"></script>
+        <script src="lib/axios.js"></script>
+        <script src="lib/mustache.js"></script>
+        <script src="main.js"></script>
+
+    </body>
+</html>
